@@ -4,7 +4,7 @@ using HackerNewsApi.Model;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
+
 
 namespace HackerNewsApi.Service
 {
@@ -16,7 +16,7 @@ namespace HackerNewsApi.Service
         private IGenericApiService _genericApiService;
         private IDistributedCache _distributedCache;
 
-        
+
         public StoryService(IOptions<ApiSource> apiSource,
             IGenericApiService genericApiService,
             IDistributedCache distributedCache)
@@ -42,7 +42,7 @@ namespace HackerNewsApi.Service
                 return ReturnResponse(apiResponse);
             }
 
-            return new HackerNewsStoryResponse { title = $"Story Id {storyId} Not found", commentCount = 0};
+            return new HackerNewsStoryResponse { title = $"Story Id {storyId} Not found", commentCount = 0 };
 
         }
 

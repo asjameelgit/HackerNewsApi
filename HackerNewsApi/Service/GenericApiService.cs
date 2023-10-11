@@ -1,6 +1,5 @@
 ﻿using HackerNewsApi.Interface;
 using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
 namespace HackerNewsApi.Service
 {
@@ -8,7 +7,7 @@ namespace HackerNewsApi.Service
     {
         private readonly HttpClient _httpClient;
 
-        public GenericApiService(IHttpClientFactory httpClientFactory) 
+        public GenericApiService(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient();
         }
@@ -17,7 +16,7 @@ namespace HackerNewsApi.Service
         {
             var response = await _httpClient.GetAsync(requestUrl, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
-            var data = await response.Content.ReadAsStringAsync();           
+            var data = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(data);
         }
     }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HackerNewsApi.Model
+﻿namespace HackerNewsApi.Model
 {
     public class HackerNewsStoryResponse
     {

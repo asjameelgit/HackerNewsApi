@@ -1,26 +1,20 @@
-﻿using HackerNewsApi.Contract;
-using HackerNewsApi.Interface;
+﻿using HackerNewsApi.Interface;
 using HackerNewsApi.Model;
-using HackerNewsApi.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using System.Net.Http;
 
 namespace HackerNewsApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class BestStoriesController : ControllerBase
     {
-        private readonly ApiSource _apiSource;
-        private IGenericApiService _genericApiService;
         private IStoryService _storyService;
 
 
-        public BestStoriesController(IOptions<ApiSource> apiSource,
-            IStoryService storyService)
+        public BestStoriesController(IStoryService storyService)
         {
-            _apiSource = apiSource.Value;
             _storyService = storyService;
         }
 
@@ -35,7 +29,7 @@ namespace HackerNewsApi.Controllers
             if (apiResponse != null && apiResponse.Count > 0)
             {
                 var returnList = new List<HackerNewsStoryResponse>();
-                foreach(var storyId in apiResponse.Take(numberOfStories))
+                foreach (var storyId in apiResponse.Take(numberOfStories))
                 {
                     var storyItem = await _storyService.GetStory(storyId.ToString());
                     returnList.Add(storyItem);
